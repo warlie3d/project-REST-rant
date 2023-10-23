@@ -11,7 +11,9 @@ app.get("/", (req, res) => {
 
 //incase you put another route it gives a 404
 app.get("*", (req, res) => {
-  res.status(404).send("<h1>404 Page</h1>");
+  res
+    .status(404)
+    .send('<h1>404 Page</h1><img src="assets/404kitty.jpg" alt ="kitty">');
 });
 
 app.listen(process.env.PORT);
