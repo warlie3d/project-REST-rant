@@ -1,12 +1,15 @@
 {
-  "name": "project-rest-rant",
+  "name": "breads",
   "version": "1.0.0",
-  "description": "back end project",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
-  "author": "warlie yap",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.3.1",
@@ -14,5 +17,8 @@
     "express-react-views": "^0.11.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0"
+  },
+  "nodemonConfig": {
+    "ext": "jsx,js,json,html"
   }
 }

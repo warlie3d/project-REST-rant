@@ -1,20 +1,25 @@
+// Modules and Globals
 require("dotenv").config();
 const express = require("express");
+const PORT = process.env.PORT;
 const app = express();
 
+// Express Settings
 app.set("view engine", "jsx");
 app.engine("jsx", require("express-react-views").createEngine());
 
-//controller
+// Controllers & Routes
 app.use("/places", require("./controllers/places"));
 
 app.get("/", (req, res) => {
   res.render("home");
 });
 
-//incase you put another route it gives a 404
 app.get("*", (req, res) => {
   res.render("error404");
 });
 
-app.listen(process.env.PORT);
+// Listen for Connections
+app.listen(PORT, () => {
+  console.log("listening to port", PORT);
+});
