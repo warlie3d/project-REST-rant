@@ -38,6 +38,7 @@ router.get("/:id/edit", (req, res) => {
 });
 
 router.post("/:id/rant", (req, res) => {
+  console.log(req.body);
   res.send("Create a rant/comment about a particular place");
 });
 
