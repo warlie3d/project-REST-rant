@@ -1,8 +1,8 @@
 const router = require("express").Router();
-const places = require("..models/places.js");
+const places = require("../models/places.js");
 
 router.get("/", (req, res) => {
-  res.render("places/Index", { places });
+  res.render("places/index", { places });
 });
 
 router.post("/", (req, res) => {
@@ -35,7 +35,7 @@ router.delete("/:id", (req, res) => {
 
 router.get("/:id", (req, res) => {
   let place = places[req.params.id];
-  res.render("places/Show", {
+  res.render("places/show", {
     place: place,
     index: req.params.id,
   });
@@ -46,17 +46,15 @@ router.put("/:id", (req, res) => {
 });
 
 router.get("/:id/edit", (req, res) => {
+  // res.send('Form page for editing an existing place')
   let place = places[req.params.id];
   res.render("places/Edit", { place });
 });
-
 router.post("/:id/rant", (req, res) => {
-  //console.log(req.body);
-  res.send("Create a rant/comment about a particular place");
+  res.send("Create a rant (comment) about a particular place");
 });
-
-router.delete("/:id/rant", (req, res) => {
-  res.send("Delete a rant/comment about a particular place");
+router.delete("/:id/:rantId", (req, res) => {
+  res.send("Delete a rant (comment) about a particular place");
 });
 
 module.exports = router;
