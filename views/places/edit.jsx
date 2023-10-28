@@ -12,19 +12,19 @@ function Edit({ place }) {
                         <label htmlFor="name">Name</label>
                         <input type= "text" placeholder={place.name} />
                     </div>
-                                        <div>
+                    <div>
                         <label htmlFor="name">City</label>
                         <input type= "text" placeholder={place.city} />
                     </div>
-                                        <div>
+                    <div>
                         <label htmlFor="name">State</label>
                         <input type= "text" placeholder={place.state} />
                     </div>
-                                        <div>
+                    <div>
                         <label htmlFor="name">Cuisines</label>
                         <input type= "text" placeholder={place.cuisines} />
                     </div>
-                                        <div>
+                    <div>
                         <label htmlFor="pic">Image URL</label>
                         <input type= "text" placeholder={place.pic} />
                     </div>
