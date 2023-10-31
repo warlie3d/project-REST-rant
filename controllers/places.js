@@ -27,7 +27,7 @@ router.get("/new", (req, res) => {
 });
 
 router.delete("/:id", (req, res) => {
-  let index = req.params.id;
+  let index = Number(req.params.id);
   places.splice(index, 1);
   res.status(303).redirect("/places");
   //res.send("Delete a particular place");
@@ -44,12 +44,18 @@ router.get("/:id", (req, res) => {
 router.put("/:id", (req, res) => {
   res.send("Update a particular place");
 });
-
+//edit
 router.get("/:id/edit", (req, res) => {
-  // res.send('Form page for editing an existing place')
-  let place = places[req.params.id];
-  res.render("places/Edit", { place });
+  let id = Number(req.params.id);
+  if (isNaN(id)) {
+    res.render("error404");
+  } else if (!places[id]) {
+    res.render("error404");
+  } else {
+    res.render("places/edit", { place: places[id] });
+  }
 });
+
 router.post("/:id/rant", (req, res) => {
   res.send("Create a rant (comment) about a particular place");
 });
