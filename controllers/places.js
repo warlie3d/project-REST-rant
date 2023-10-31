@@ -26,24 +26,39 @@ router.get("/new", (req, res) => {
   res.render("places/New");
 });
 
+router.put("/:id", (req, res) => {
+  let index = Number(req.params.id);
+  if (isNaN(index)) {
+    res.render("error404");
+  } else if (!places[index]) {
+    res.render("error404");
+  } else {
+    places[index] = { ...places[index], ...req.body };
+  }
+  res.redirect(`/places/${index}`);
+});
+
 router.delete("/:id", (req, res) => {
   let index = Number(req.params.id);
   places.splice(index, 1);
-  res.status(303).redirect("/places");
-  //res.send("Delete a particular place");
+  res.redirect("/places");
 });
 
 router.get("/:id", (req, res) => {
-  let place = places[req.params.id];
-  res.render("places/show", {
-    place: place,
-    index: req.params.id,
-  });
+  let index = Number(req.params.id);
+  if (isNaN(index)) {
+    res.render("error404");
+  } else if (!places[index]) {
+    res.render("error404");
+  } else {
+    let place = places[req.params.id];
+    res.render("places/show", {
+      place: place,
+      index: index,
+    });
+  }
 });
 
-router.put("/:id", (req, res) => {
-  res.send("Update a particular place");
-});
 //edit
 router.get("/:id/edit", (req, res) => {
   let id = Number(req.params.id);
@@ -52,7 +67,11 @@ router.get("/:id/edit", (req, res) => {
   } else if (!places[id]) {
     res.render("error404");
   } else {
-    res.render("places/edit", { place: places[id] });
+    let place = places[req.params.id];
+    res.render("places/edit", {
+      place: place,
+      index: index,
+    });
   }
 });
 

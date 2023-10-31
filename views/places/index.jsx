@@ -32,8 +32,7 @@ function index ({places}) {
         <div>
           <a href="/places/new"><button className='btn btn-primary'>Create A New Place</button></a>
           <a href="/"></a><button className='btn btn-secondary'>Back to Home Page</button>
-        </div>
-           
+        </div>         
         </main>
     </Default>
 )
