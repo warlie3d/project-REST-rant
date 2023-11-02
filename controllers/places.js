@@ -33,15 +33,23 @@ router.put("/:id", (req, res) => {
   } else if (!places[index]) {
     res.render("error404");
   } else {
-    places[index] = { ...places[index], ...req.body };
+    let place = places[index];
+    places[index] = { ...place[index], ...req.body };
+
+    res.redirect(`/places/${index}`);
   }
-  res.redirect(`/places/${index}`);
 });
 
 router.delete("/:id", (req, res) => {
   let index = Number(req.params.id);
-  places.splice(index, 1);
-  res.redirect("/places");
+  if (isNaN(index)) {
+    res.render("Error404");
+  } else if (!places[index]) {
+    res.render("Error404");
+  } else {
+    places.splice(index, 1);
+    res.redirect("/places");
+  }
 });
 
 router.get("/:id", (req, res) => {
@@ -61,10 +69,10 @@ router.get("/:id", (req, res) => {
 
 //edit
 router.get("/:id/edit", (req, res) => {
-  let id = Number(req.params.id);
-  if (isNaN(id)) {
+  let index = Number(req.params.id);
+  if (isNaN(index)) {
     res.render("error404");
-  } else if (!places[id]) {
+  } else if (!places[index]) {
     res.render("error404");
   } else {
     let place = places[req.params.id];

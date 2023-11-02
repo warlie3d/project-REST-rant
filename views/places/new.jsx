@@ -19,16 +19,6 @@ function New() {
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="post-pic">Place Picture</label>
-                        <input
-                        type="url"
-                        className="form-control"
-                        name='pic'
-                        id='post-pic'
-                        />
-                    </div>
-
-                    <div className="form-group">
                         <label htmlFor="post-city">City</label>
                         <input
                         type="text"
@@ -37,7 +27,6 @@ function New() {
                         id='post-city'
                         />
                     </div>
-
                     <div className="form-group">
                         <label htmlFor="post-state">State</label>
                         <input
@@ -57,13 +46,20 @@ function New() {
                         id='post-cuisines'
                         required/>
                     </div>
-
-
+                    <div className="form-group">
+                        <label htmlFor="post-pic">Place Picture</label>
+                        <input
+                        type="url"
+                        className="form-control"
+                        name='pic'
+                        id='post-pic'
+                        />
+                    </div>
                     <div>
-                        <a href="/places"><button className='btn btn-secondary'>Back to places</button></a>
-                        <button typ='submit' className='btn btn-success'>Add Place</button>
+                        <button type='submit' className='btn btn-success'>Add Place</button>
                     </div>
                 </form>
+                <a href="/places"><button className='btn btn-secondary'>Back to places</button></a>
             </main>
         </Default>
     )
