@@ -2,6 +2,7 @@ const React = require('react')
 const Default = require('../default')
 
 function Edit({ place, index }) {
+    console.log('index',index)
     return (
         <Default>
             <main>

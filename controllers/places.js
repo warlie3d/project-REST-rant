@@ -11,7 +11,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
   console.log(req.body);
   let place = req.body;
   if (!req.body.pic) {
@@ -23,7 +23,7 @@ router.post("/", (req, res) => {
   if (!req.body.state) {
     place.state = "USA";
   }
-  places.push(place);
+  await places.create(place);
   //should give path
   res.redirect("/places");
 });
