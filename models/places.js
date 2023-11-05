@@ -1,4 +1,19 @@
-module.exports = [
+const mongoose = require("mongoose");
+
+const placeSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  city: { type: String, default: "Anytown" },
+  state: { type: String, default: "USA" },
+  cuisines: { type: String, required: true },
+  pic: String,
+  founded: Number,
+});
+
+const Place = mongoose.model("Place", placeSchema);
+
+module.exports = Place;
+
+/* module.exports = [
   {
     name: "H-Thai-ML",
     city: "Seattle",
@@ -18,3 +33,4 @@ module.exports = [
     //authorLink:'https://unsplash.com/@dearjamie?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash'
   },
 ];
+ */

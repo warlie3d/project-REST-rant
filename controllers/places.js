@@ -1,8 +1,14 @@
 const router = require("express").Router();
 const places = require("../models/places.js");
 
-router.get("/", (req, res) => {
-  res.render("places/index", { places });
+router.get("/", async (req, res) => {
+  try {
+    const allPLaces = await places.find();
+    res.render("places/index", { places: allPLaces });
+  } catch (e) {
+    console.log("error", e);
+    res.status(404).render("Error 404");
+  }
 });
 
 router.post("/", (req, res) => {
@@ -52,18 +58,22 @@ router.delete("/:id", (req, res) => {
   }
 });
 
-router.get("/:id", (req, res) => {
-  let index = Number(req.params.id);
+router.get("/:id", async (req, res) => {
+  /*  let index = Number(req.params.id);
   if (isNaN(index)) {
     res.render("error404");
   } else if (!places[index]) {
     res.render("error404");
-  } else {
-    let place = places[req.params.id];
+  } else { */
+  try {
+    let place = await places[req.params.id];
     res.render("places/show", {
       place: place,
-      index: index,
+      index: req.params.id,
     });
+  } catch (e) {
+    console.log("error", e);
+    res.render("Error404");
   }
 });
 
