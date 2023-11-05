@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const places = require("../models/places.js");
+const places = require("../models/places");
 
 router.get("/", async (req, res) => {
   try {
@@ -29,19 +29,19 @@ router.post("/", async (req, res) => {
 });
 
 router.get("/new", (req, res) => {
-  res.render("places/New");
+  res.render("places/new");
 });
 
 router.put("/:id", (req, res) => {
   let index = Number(req.params.id);
+  console.log(req.body);
   if (isNaN(index)) {
-    res.render("error404");
+    res.render("Error404");
   } else if (!places[index]) {
-    res.render("error404");
+    res.render("Error404");
   } else {
     let place = places[index];
-    places[index] = { ...place[index], ...req.body };
-
+    places[index] = { ...place, ...req.body };
     res.redirect(`/places/${index}`);
   }
 });
@@ -66,7 +66,7 @@ router.get("/:id", async (req, res) => {
     res.render("error404");
   } else { */
   try {
-    let place = await places[req.params.id];
+    let place = await places.findById(req.params.id);
     res.render("places/show", {
       place: place,
       index: req.params.id,
@@ -79,14 +79,15 @@ router.get("/:id", async (req, res) => {
 
 //edit
 router.get("/:id/edit", (req, res) => {
+  // res.send('Form page for editing an existing place')
   let index = Number(req.params.id);
   if (isNaN(index)) {
-    res.render("error404");
+    res.render("Error404");
   } else if (!places[index]) {
-    res.render("error404");
+    res.render("Error404");
   } else {
     let place = places[req.params.id];
-    res.render("places/edit", {
+    res.render("places/Edit", {
       place: place,
       index: index,
     });

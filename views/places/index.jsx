@@ -10,7 +10,7 @@ function index ({places}) {
     return (
       <div key={place.id}>
         <div className='col'>
-          <a href={`/places/${places.id}`}><h2>{place.name}</h2></a>
+          <a href={`/places/${place.id}`}><h2>{place.name}</h2></a>
           <p className='text-center'>
             {place.cuisines}
           </p>

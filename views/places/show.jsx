@@ -1,7 +1,7 @@
 const React = require('react')
 const Default = require('../default')
 
-function Show({ place, index }) {
+function show({ place, index }) {
     return (
         <Default>
             <main>
@@ -32,13 +32,13 @@ function Show({ place, index }) {
                     <a href={`/places/${index}/edit`}><button className='btn btn-warning'>Edit</button></a>
                     <form action={`/places/${index}?_method=DELETE`} method='POST' >
                         <input className='btn btn-danger' type='submit' value='DELETE' />
-                        <a href='/places'><button className='btn btn-secondary'> Go To Places</button></a>
+                        
                     </form>
-
+                        <a href='/places'><button className='btn btn-secondary'> Go To Places</button></a>
                 </div>
             </main>
         </Default>
     )
 }
 
-module.exports = Show
+module.exports = show

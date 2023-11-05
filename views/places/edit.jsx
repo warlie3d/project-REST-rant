@@ -55,8 +55,8 @@ function Edit({ place, index }) {
                     <div className='form-group m-1' >
                         <label htmlFor="pic">Image URL</label>
                         <input
-                            id="img"
-                            name="img"
+                            id="pic"
+                            name="pic"
                             type="text"
                             className="form-control"
                             defaultValue={place.pic}
