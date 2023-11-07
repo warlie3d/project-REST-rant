@@ -13,20 +13,35 @@ router.get("/", async (req, res) => {
 });
 
 // route to create new place
-router.post("/", async (req, res) => {
+router.post("/", (req, res) => {
   console.log(req.body);
-  let place = req.body;
-  if (!req.body.pic) {
-    place.pic = "http://placekitten.com/400/400";
-  }
-  if (!req.body.city) {
-    place.city = "Anytown";
-  }
-  if (!req.body.state) {
-    place.state = "USA";
-  }
-  await places.create(place);
-  res.redirect("/places");
+  // let place = req.body;
+  // if (!req.body.pic) {
+  //   place.pic = "http://placekitten.com/400/400";
+  // }
+  // if (!req.body.city) {
+  //   place.city = "Anytown";
+  // }
+  // if (!req.body.state) {
+  //   place.state = "USA";
+  // }
+  // await places.create(place);
+  // res.redirect("/places");
+
+  db.Place.create(req.body)
+    .then(() => {
+      res.direct("/places");
+    })
+    .catch((err) => {
+      // console.log("err", err);
+      if (err && err.name == "ValidationError") {
+        let message = "Validation Error: ";
+        //Todo: Find all validation errors
+        res.render("places/new", { message });
+      } else {
+        res.render("error404");
+      }
+    });
 });
 
 //route to display a form creating a new place

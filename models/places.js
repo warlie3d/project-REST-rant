@@ -6,7 +6,11 @@ const placeSchema = new mongoose.Schema({
   state: { type: String, default: "USA" },
   cuisines: { type: String, required: true },
   pic: { type: String, default: "https://placekitten.com/200/300" },
-  founded: Number,
+  founded: {
+    type: Number,
+    min: [1673, " Surely not that old?!"],
+    max: [new Date().getFullYear(), "HEY, This year is in the future!"],
+  },
 });
 
 //instance method
