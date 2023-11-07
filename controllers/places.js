@@ -28,7 +28,8 @@ router.post("/", (req, res) => {
   // await places.create(place);
   // res.redirect("/places");
 
-  db.Place.create(req.body)
+  places
+    .create(req.body)
     .then(() => {
       res.direct("/places");
     })
