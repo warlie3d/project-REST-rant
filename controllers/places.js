@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const places = require("../models/places");
 
+//route to display all places
 router.get("/", async (req, res) => {
   try {
     const allPLaces = await places.find();
@@ -11,6 +12,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+// route to create new place
 router.post("/", async (req, res) => {
   console.log(req.body);
   let place = req.body;
@@ -24,14 +26,15 @@ router.post("/", async (req, res) => {
     place.state = "USA";
   }
   await places.create(place);
-  //should give path
   res.redirect("/places");
 });
 
+//route to display a form creating a new place
 router.get("/new", (req, res) => {
   res.render("places/new");
 });
 
+//rout to update a place
 router.put("/:id", (req, res) => {
   let index = Number(req.params.id);
   console.log(req.body);
@@ -46,25 +49,28 @@ router.put("/:id", (req, res) => {
   }
 });
 
-router.delete("/:id", (req, res) => {
-  let index = Number(req.params.id);
-  if (isNaN(index)) {
-    res.render("Error404");
-  } else if (!places[index]) {
-    res.render("Error404");
-  } else {
-    places.splice(index, 1);
-    res.redirect("/places");
-  }
+//delete
+router.delete("/:id", async (req, res) => {
+  let index = req.params.id;
+  // if (isNaN(index)) {
+  //   res.render("Error404");
+  // } else if (!places[index]) {
+  //   res.render("Error404");
+  // } else {
+  //   places.splice(index, 1);
+  // }
+  await places.findByIdAndDelete(index);
+  res.redirect("/places");
 });
 
+// route to display  a single place by it's id
 router.get("/:id", async (req, res) => {
-  /*  let index = Number(req.params.id);
-  if (isNaN(index)) {
-    res.render("error404");
-  } else if (!places[index]) {
-    res.render("error404");
-  } else { */
+  //  let index = Number(req.params.id);
+  // if (isNaN(index)) {
+  //   res.render("error404");
+  // } else if (!places[index]) {
+  //   res.render("error404");
+  // } else {
   try {
     let place = await places.findById(req.params.id);
     res.render("places/show", {
@@ -77,7 +83,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-//edit
+//edit an existing place
 router.get("/:id/edit", (req, res) => {
   // res.send('Form page for editing an existing place')
   let index = Number(req.params.id);
@@ -87,13 +93,14 @@ router.get("/:id/edit", (req, res) => {
     res.render("Error404");
   } else {
     let place = places[req.params.id];
-    res.render("places/Edit", {
+    res.render("places/edit", {
       place: place,
       index: index,
     });
   }
 });
 
+//routes for creating and deleting rants
 router.post("/:id/rant", (req, res) => {
   res.send("Create a rant (comment) about a particular place");
 });

@@ -5,9 +5,14 @@ const placeSchema = new mongoose.Schema({
   city: { type: String, default: "Anytown" },
   state: { type: String, default: "USA" },
   cuisines: { type: String, required: true },
-  pic: String,
+  pic: { type: String, default: "https://placekitten.com/200/300" },
   founded: Number,
 });
+
+//instance method
+placeSchema.methods.showEstablished = function () {
+  return `${this.name} has been serving ${this.city},${this.state} since ${this.founded}`;
+};
 
 const Place = mongoose.model("Place", placeSchema);
 

@@ -19,7 +19,9 @@ function show({ place, index }) {
                                 <h3 className="card-title">Rating</h3>
                                 <p className="card-text">Not Rated</p>
                                 <h3 className="card-title">Description</h3>
-                                <p className="card-text">Located in {place.city}, {place.state} serving {place.cuisines}.</p>
+                                <h4 className="card-text">{place.showEstablished()}</h4>
+                                <h5 className="card-text">Serving {place.cuisines}</h5>
+                                {/* p className="card-text">Located in {place.city}, {place.state} serving {place.cuisines}.</p> */}
                             </div>
                         </div>
                     </div> 

@@ -18,6 +18,16 @@ app.engine("jsx", require("express-react-views").createEngine());
 
 app.use(express.urlencoded({ extended: true }));
 
+const db = async () => {
+  try {
+    await mongoose.connect(MONGO_URI);
+    console.log("Connected to MongoDb");
+  } catch (e) {
+    console.log("Not connected to MongoDb", e);
+  }
+};
+db();
+
 //controller
 app.use("/places", require("./controllers/places"));
 //app.use(methodOverride("_method"));
@@ -36,13 +46,3 @@ app.listen(PORT, () => {
 });
 
 //connect to db
-
-const db = async () => {
-  try {
-    await mongoose.connect(MONGO_URI);
-    console.log("Connected to MongoDb");
-  } catch (e) {
-    console.log("Not connected to MongoDb", e);
-  }
-};
-db();
