@@ -5,7 +5,7 @@ function home (html) {
   return (
     <Default>
         <main>
-        <h1>HOME</h1>
+        <h1>RES-RANT</h1>
         <div className="text-center">
           <img src="https://images.unsplash.com/photo-1625477811233-044633d10dd1?auto=format&fit=crop&q=80&w=2574&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="lechon pork belly" height='500' />
           <div>
@@ -13,7 +13,7 @@ function home (html) {
   
           </div>
         </div>
-        
+        <a href="/places"><button className='btn-primary'>Places page</button></a>
         </main>
     </Default>
   )

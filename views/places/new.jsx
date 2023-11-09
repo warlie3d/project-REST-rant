@@ -1,7 +1,13 @@
 const React = require('react')
 const Default = require('../default')
 
-function New() {
+function New(data) {
+    let message = ''
+    if (data.message) {
+        message = (
+            <h4 className='alert-danger'>{data.message}</h4>
+        )
+    }
     return (
         <Default>
 
@@ -62,6 +68,7 @@ function New() {
                             className="form-control"
                             id="founded"
                             name="founded"
+                            value={new Date().getFullYear()}
                         />
                     </div>
                     <div>

@@ -2,6 +2,26 @@ const React = require('react')
 const Default = require('../default')
 
 function show({ place, index }) {
+    let comments = (
+    <h3 className="inactive">
+        No comments yet!
+    </h3>
+    )
+    if (place.comments.length) {
+        comments = place.comments.map(c => {
+            return (
+                <div key={c.id} className="border">
+                    <h2 className="rant">{c.rant ? 'Rant!' : 'Rave!'}</h2>
+                    <h4>{c.content}</h4>
+                    <h3>
+                        <stong>- {c.author}</stong>
+                    </h3>
+                    <h4>Rating: {c.stars}</h4>
+                </div>
+            )
+        })
+    }
+    
     return (
         <Default>
             <main>
@@ -21,21 +41,20 @@ function show({ place, index }) {
                                 <h3 className="card-title">Description</h3>
                                 <h4 className="card-text">{place.showEstablished()}</h4>
                                 <h5 className="card-text">Serving {place.cuisines}</h5>
-                                {/* p className="card-text">Located in {place.city}, {place.state} serving {place.cuisines}.</p> */}
+                                {/* p className="card-text">Located in {place.city}, {place.state} serving {place.cuisines}.</p> */} 
                             </div>
-                        </div>
-                    </div> 
-                </div>
-                <div className='comments-container'>
-                    <h3>Comments</h3>
-                    <p>No Comments yet</p>
-                </div>
-                <div className='button-container'>
+                            <div className='button-container'>
                     <a href={`/places/${index}/edit`}><button className='btn btn-warning'>Edit</button></a>
                     <form action={`/places/${index}?_method=DELETE`} method='POST' >
                         <input className='btn btn-danger' type='submit' value='DELETE' />
-                        
-                    </form>
+                        </form>
+                        </div>
+                    </div> 
+                </div>
+                    <div className='comments-container'>
+                    <h3>Comments</h3>
+                    {comments}
+                </div>
                         <a href='/places'><button className='btn btn-secondary'> Go To Places</button></a>
                 </div>
             </main>
