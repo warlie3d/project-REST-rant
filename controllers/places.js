@@ -102,7 +102,7 @@ router.get("/:id/edit", async (req, res) => {
   //   res.render("Error404");
   // }
   try {
-    let place = await places.findById[req.params.id];
+    let place = await places.findById(req.params.id);
     res.render("places/edit", {
       place: place,
       index: index,
