@@ -43,10 +43,12 @@ function show({ place, index }) {
                                 <h5 className="card-text">Serving {place.cuisines}</h5>
                                 {/* p className="card-text">Located in {place.city}, {place.state} serving {place.cuisines}.</p> */} 
                             </div>
+                            <div className= "d-inline">
                                 <a href={`/places/${index}/edit`}><button className='btn btn-warning'>Edit</button></a>
                                 <form action={`/places/${index}?_method=DELETE`} method='POST' >
                                 <input className='btn btn-danger' type='submit' value='DELETE' />
                                 </form>
+                            </div>
                         </div>
                     </div> 
                 </div>
@@ -56,7 +58,7 @@ function show({ place, index }) {
                         {comments}
                     </div>
                 </div>
-                <h3>Got your own Rant or Rave</h3>
+                <h3>Got your own Rant or Rave?</h3>
                 <form action={`/places/${index}/comments`} method='POST'>
                     <div className="form-group">
                         <label htmlFor="post-content">Comment</label>
