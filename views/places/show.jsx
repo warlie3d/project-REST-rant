@@ -2,21 +2,46 @@ const React = require('react')
 const Default = require('../default')
 
 function show({ place, index }) {
+    
     let comments = (
-    <h4 className="inactive">
-        No comments yet!
-    </h4>
+        <h4 className="inactive">
+            No comments yet!
+        </h4>
     )
+
+    let rating = (
+        <h4 className='inactive'>
+            No rated yet!
+        </h4>
+    )
+
     if (place.comments.length) {
+        let sumRatings = place.comments.reduce((total, c) => {
+            return total += c.stars
+        }, 0)
+        let averageRating = Math.round(sumRatings / place.comments.length)
+        let stars = ''
+        for (let i = 0; i < averageRating; i++) {
+            stars += '⭐'
+        }
+        rating = (
+            <h3>
+                {stars}
+            </h3>
+        )
         comments = place.comments.map(c => {
             return (
                 <div key={c.id} className="border col-4">
-                    <h2 className="rant">{c.rant ? 'Rant!' : 'Rave!'}</h2>
+                    <h2 className="rant">{c.rant ? 'Rant!😡 ' : 'Rave!😻'}</h2>
                     <h4>{c.content}</h4>
                     <h3>
                         <stong>- {c.author}</stong>
                     </h3>
-                    <h4>Rating: {c.stars}</h4>
+                    <h4>Rating: {c.stars}⭐</h4>
+                    <form action={`/places/${index}/comments/${c.id}?_method=DELETE`} method='POST' >
+                        <input className='btn btn-danger' type="submit" value='DELETE' 
+                        />
+                    </form>
                 </div>
             )
         })
@@ -36,8 +61,8 @@ function show({ place, index }) {
                 <div className="col-md-8">
                             <div className="card-body">
                                 <h1 className="card-title">{place.name}</h1>
-                                <h3 className="card-title">Rating</h3>
-                                <p className="card-text">Not Rated</p>
+                                <h3 className="card-title">Rating⭐</h3>
+                                <p className="card-text">{ rating }</p>
                                 <h3 className="card-title">Description</h3>
                                 <h4 className="card-text">{place.showEstablished()}</h4>
                                 <h5 className="card-text">Serving {place.cuisines}</h5>
@@ -52,6 +77,7 @@ function show({ place, index }) {
                         </div>
                     </div> 
                 </div>
+
                 <div className='comments-container'>
                     <h3>Comments</h3>
                     <div className="row">
@@ -83,7 +109,7 @@ function show({ place, index }) {
                             />
                         </div>
                         <div className="form-group col-4">
-                            <label htmlFor="post-stars" className='form-label' >Star Rating</label>
+                            <label htmlFor="post-stars" className='form-label'>Star Rating ⭐</label>
                             <input
                                 type="range"
                                 className="form-range"
@@ -110,7 +136,7 @@ function show({ place, index }) {
                 <a href="/places"><button className='btn btn-secondary'>Back to places</button></a>
             </main>
         </Default>
-
+//
     )
 }
 module.exports = show

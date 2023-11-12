@@ -35,14 +35,14 @@ router.post("/", async (req, res) => {
       let message = "Validation Error: ";
       //Todo: Find all validation errors
       for (let field in e.errors) {
-        message += `${field} was ${e.errors[field].value}.`;
+        message += `${field} was ${e.errors[field].value} .`;
         message += `${e.errors[field].message}`;
         console.log("Validation error message", message);
       }
       res.render("places/new", { message });
     } else {
       console.log("Err", e);
-      res.render("error404", e);
+      res.render("Error404", e);
     }
   }
 });
@@ -151,6 +151,11 @@ router.post("/:id/comments", async (req, res) => {
   place.save();
   // res.send('new comment added', req.body)
   res.redirect(`/places/${index}`);
+});
+//delete comment
+router.delete("/:id/comments/:cID", (req, res) => {
+  let index = req.params.id;
+  res.send("Deleting a comment");
 });
 
 //routes for creating and deleting rants
